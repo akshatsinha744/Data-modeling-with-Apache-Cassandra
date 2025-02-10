@@ -3,12 +3,10 @@ import cassandra
 from cassandra.cluster import Cluster
 
 def process_data(file_path):
-    """Reads CSV data and processes it into a DataFrame."""
     df = pd.read_csv(file_path)
     return df
 
 def insert_data(session, df):
-    """Inserts processed data into Cassandra tables."""
     for _, row in df.iterrows():
         session.execute("""
             INSERT INTO songplays_by_session (session_id, item_in_session, artist, song_title, song_length)
@@ -26,7 +24,6 @@ def insert_data(session, df):
         """, (row.song, row.userId, row.firstName, row.lastName))
 
 def main():
-    """Main ETL function to extract, transform, and load data."""
     cluster = Cluster(['127.0.0.1'])
     session = cluster.connect()
     session.set_keyspace('sparkify')
