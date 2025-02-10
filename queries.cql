@@ -1,9 +1,7 @@
--- Drop existing tables
 DROP TABLE IF EXISTS songplays_by_session;
 DROP TABLE IF EXISTS songplays_by_user;
 DROP TABLE IF EXISTS songplays_by_song;
 
--- Create tables
 CREATE TABLE IF NOT EXISTS songplays_by_session (
     session_id INT, item_in_session INT, artist TEXT, song_title TEXT, song_length FLOAT,
     PRIMARY KEY (session_id, item_in_session)
