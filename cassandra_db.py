@@ -1,7 +1,6 @@
 from cassandra.cluster import Cluster
 
 def create_keyspace():
-    """Creates Cassandra keyspace for the project."""
     cluster = Cluster(['127.0.0.1'])
     session = cluster.connect()
     session.execute("""
@@ -12,7 +11,6 @@ def create_keyspace():
     return session
 
 def create_tables(session):
-    """Creates necessary tables for queries."""
     session.execute("""
         CREATE TABLE IF NOT EXISTS songplays_by_session (
             session_id INT, item_in_session INT, artist TEXT, song_title TEXT, song_length FLOAT,
@@ -35,7 +33,6 @@ def create_tables(session):
     """)
 
 def main():
-    """Main function to create database and tables."""
     session = create_keyspace()
     create_tables(session)
     session.shutdown()
